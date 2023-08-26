@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES6",      // Set the target ECMAScript version
+    "module": "CommonJS", // Specify module system (CommonJS, ESNext, etc.)
+    "outDir": "./dist",   // Output directory for compiled files
+    "rootDir": "./src",   // Root directory of your source files
+    "strict": true,       // Enable strict type checking
+    "jsx": "react-jsx" ,
+    "esModuleInterop": true,
+    "declaration": true,
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"], // List of files to include in compilation
+  "exclude": ["node_modules"] // List of directories to exclude from compilation
+}

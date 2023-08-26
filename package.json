@@ -1,0 +1,32 @@
+{
+  "name": "nextjs13-ssr-paginator",
+  "version": "0.0.1",
+  "description": "NextJS 13 Server Side Rendered Paginator",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "postinstall": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nextjs",
+    "13",
+    "react",
+    "paginate",
+    "paginator",
+    "pagination",
+    "component",
+    "nextjs-component"
+  ],
+  "author": "p9436",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.5.6",
+    "@types/react": "^18.2.21",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "next": "^13.4.19"
+  }
+}
