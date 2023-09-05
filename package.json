@@ -1,6 +1,6 @@
 {
   "name": "nextjs13-ssr-paginator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "NextJS 13 Server Side Rendered Paginator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
