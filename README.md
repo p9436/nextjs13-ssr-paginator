@@ -23,7 +23,7 @@ import Paginator from 'nextjs13-ssr-paginator';
 2. Place the Paginator component in your component's render:
 
 
-```typescript
+```tsx
 export default async function Page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
     const currentPage = parseInt(searchParams['page'] as string, 10) || 1
     const { data, meta } = await getData(currentPage) // 
@@ -37,7 +37,7 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
             ))}
 
             <nav className="pt-6">
-                <Paginator path='/admin/users' currentPage={currentPage} totalPages={meta.totalPages}/>
+                <Paginator path="/admin/users" currentPage={currentPage} totalPages={meta.totalPages}/>
             </nav>
         </main>
     )
@@ -46,11 +46,13 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
 
 Here is an example with a full list of available properties:
 
-```javascript
+```tsx
+// const urlParams = { q: 'image', in: 'actions' } 
 <Paginator
   path="/your-route"         // The base path for pagination links
   currentPage={1}            // The current active page number
   totalPages={10}            // The total number of pages
+  params={ urlParams }       // (Optional) Url params, will be conwerted to /your-route?q=image&in=actions
   maxVisiblePages={5}        // (Optional) The maximum number of visible pages
   buttonLabelPrevious="Prev" // (Optional) Label for the "Previous" button
   buttonLabelNext="Next"     // (Optional) Label for the "Next" button
@@ -74,6 +76,7 @@ For example, to redefine the general styling, left buttons, and right buttons, y
 - `path`: The base path for pagination links.
 - `currentPage`: The current active page number.
 - `totalPages`: The total number of pages.
+- `params` (optional): URL params.
 - `maxVisiblePages` (optional): The maximum number of visible pages (default: 5).
 - `buttonLabelPrevious` (optional): Label for the "Previous" button (default: "Previous").
 - `buttonLabelNext` (optional): Label for the "Next" button (default: "Next").

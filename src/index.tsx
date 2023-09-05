@@ -3,8 +3,8 @@ import Link from "next/link";
 // Defaults:
 // style General
 const defaultStyleClassG = "flex items-center justify-center px-4 h-10 border";
-const defaultStyleClassL = "rounded-l-lg";
-const defaultStyleClassR = "rounded-r-lg";
+const defaultStyleClassL = "rounded-l";
+const defaultStyleClassR = "rounded-r";
 // style Active
 const defaultStyleClassA = "text-gray-600 bg-gray-50 hover:bg-gray-100 hover:text-gray-700";
 // style Inactive
@@ -30,6 +30,7 @@ interface Props {
     styleClassActive?: string;
     styleClassInactive?: string;
     styleClassDisabled?: string;
+    params?: any;
 }
 
 export default function Paginator(props: Props) {
@@ -37,6 +38,7 @@ export default function Paginator(props: Props) {
         path,
         currentPage,
         totalPages,
+        params = {},
         maxVisiblePages = 5,
         buttonLabelPrevious = defaultBtnLabelPrevious,
         buttonLabelNext = defaultBtnLabelNext,
@@ -49,7 +51,13 @@ export default function Paginator(props: Props) {
     } = props;
 
     const prevPageNum = currentPage === 1 ? null : currentPage - 1;
-    const prevPageLink = prevPageNum ? `${path}?page=${prevPageNum}` : null;
+    const prevPageLink = prevPageNum
+        ? (() => {
+            const queryParams = new URLSearchParams({ ...params, page: prevPageNum }).toString();
+            return `${path}?${queryParams}`;
+        })()
+        : null;
+
     const itemPrev = (
         <li key="prev">
             {prevPageLink ? (
@@ -70,13 +78,19 @@ export default function Paginator(props: Props) {
     );
 
     const nextPageNum = currentPage === totalPages ? null : currentPage + 1;
-    const nextPageLink = nextPageNum ? `${path}?page=${nextPageNum}` : null;
+    const nextPageLink = nextPageNum
+        ? (() => {
+            const queryParams = new URLSearchParams({ ...params, page: nextPageNum }).toString();
+            return `${path}?${queryParams}`;
+        })()
+        : null;
+
     const itemNext = (
-        <li key="prev">
+        <li key="next">
             {nextPageLink ? (
                 <Link
                     href={nextPageLink}
-                    className={`${styleClassGeneral} ${styleClassRight} {styleClassInactive}`}
+                    className={`${styleClassGeneral} ${styleClassRight} ${styleClassInactive}`}
                 >
                     {buttonLabelNext}
                 </Link>
@@ -157,7 +171,8 @@ export default function Paginator(props: Props) {
 
     const renderPaginationLink = (pageNum: number) => {
         const isActive = pageNum === currentPage;
-        const pageLink = pageNum === 1 ? path : `${path}?page=${pageNum}`;
+        const queryParams = new URLSearchParams({ ...params, page: pageNum }).toString();
+        const pageLink = pageNum === 1 ? path : `${path}?${queryParams}`;
 
         return (
             <li key={pageNum}>
