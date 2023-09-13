@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ul.pagination{
+    @apply inline-flex;
+}
+
+ul.pagination .item {
+    @apply py-2 px-4 border;
+}
+ul.pagination .item-left {
+    @apply border-r-0 rounded-l-lg;
+}
+ul.pagination .item-mid {
+    @apply border-r-0;
+}
+ul.pagination .item-right {
+    @apply rounded-r-lg;
+}
+ul.pagination .item-state-disable{
+    @apply bg-white text-gray-400
+}
+ul.pagination .item-state-current {
+    @apply bg-gray-100
+}
+ul.pagination .item-state-other {
+    @apply bg-white hover:bg-gray-100;
+}

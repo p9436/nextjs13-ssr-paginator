@@ -26,7 +26,10 @@
     "@types/react": "^18.2.21",
     "typescript": "^5.2.2"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "tailwindcss": "^3.3.3",
     "next": "^13.4.19"
+  },
+  "dependencies": {
   }
 }

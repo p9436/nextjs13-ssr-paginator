@@ -17,3 +17,7 @@ main {
     background: whitesmoke;
     margin: 10px 10px 0 10px;
 }
+
+.pagination .item {
+    @apply py-2 px-4 border;
+}

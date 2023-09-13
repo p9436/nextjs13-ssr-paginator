@@ -1,14 +1,16 @@
+import './styles.css'
+
 // Defaults:
 const defaultBtnLabelPrevious = "Prev";
 const defaultBtnLabelNext = "Next";
-const defaultStyleGeneral = "py-2 px-4 border"
-const defaultStyleLeft = "border-r-0 rounded-l-lg"
-const defaultStyleMiddle = "border-r-0"
-const defaultStyleRight = "rounded-r-lg"
-const defaultStyleDisabled = "bg-white text-gray-400"
-const defaultStyleCurrent = "bg-gray-100"
-const defaultStyleOther = "bg-white hover:bg-gray-100"
-const defaultStyleWrapper = "inline-flex"
+const defaultStyleGeneral = "item"
+const defaultStyleLeft = "item-left"
+const defaultStyleMiddle = "item-mid"
+const defaultStyleRight = "item-right"
+const defaultStyleDisabled = "item-state-disable"
+const defaultStyleCurrent = "item-state-current"
+const defaultStyleOther = "item-state-other"
+const defaultStyleWrapper = "pagination"
 
 interface Props {
     path: string;
