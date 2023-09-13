@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 40, 40, 40;
+  --background-start-rgb: 240, 240, 240;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: whitesmoke;
+}
+
+main {
+    background: whitesmoke;
+    margin: 10px 10px 0 10px;
+}

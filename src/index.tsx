@@ -1,21 +1,14 @@
-import Link from "next/link";
-
 // Defaults:
-// style General
-const defaultStyleClassG = "flex items-center justify-center px-4 h-10 border";
-const defaultStyleClassL = "rounded-l";
-const defaultStyleClassR = "rounded-r";
-// style Active
-const defaultStyleClassA = "text-gray-600 bg-gray-50 hover:bg-gray-100 hover:text-gray-700";
-// style Inactive
-const defaultStyleClassN = "text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700 ";
-// style Disabled
-const defaultStyleClassD = "text-gray-400 bg-gray-50";
-// style Wrapper
-const defaultStyleClassW = "inline-flex -space-x-px text-base h-10";
-//Prev and next buttons
-const defaultBtnLabelPrevious = "Previous";
+const defaultBtnLabelPrevious = "Prev";
 const defaultBtnLabelNext = "Next";
+const defaultStyleGeneral = "py-2 px-4 border"
+const defaultStyleLeft = "border-r-0 rounded-l-lg"
+const defaultStyleMiddle = "border-r-0"
+const defaultStyleRight = "rounded-r-lg"
+const defaultStyleDisabled = "bg-white text-gray-400"
+const defaultStyleCurrent = "bg-gray-100"
+const defaultStyleOther = "bg-white hover:bg-gray-100"
+const defaultStyleWrapper = "inline-flex"
 
 interface Props {
     path: string;
@@ -24,9 +17,11 @@ interface Props {
     maxVisiblePages?: number;
     buttonLabelPrevious?: string;
     buttonLabelNext?: string;
+    styleClassWrapper?: string;
     styleClassGeneral?: string;
     styleClassLeft?: string;
     styleClassRight?: string;
+    styleClassMiddle?: string;
     styleClassActive?: string;
     styleClassInactive?: string;
     styleClassDisabled?: string;
@@ -42,12 +37,14 @@ export default function Paginator(props: Props) {
         maxVisiblePages = 5,
         buttonLabelPrevious = defaultBtnLabelPrevious,
         buttonLabelNext = defaultBtnLabelNext,
-        styleClassGeneral = defaultStyleClassG,
-        styleClassLeft = defaultStyleClassL,
-        styleClassRight = defaultStyleClassR,
-        styleClassActive = defaultStyleClassA,
-        styleClassInactive = defaultStyleClassN,
-        styleClassDisabled = defaultStyleClassD,
+        styleClassWrapper = defaultStyleWrapper,
+        styleClassGeneral = defaultStyleGeneral,
+        styleClassLeft = defaultStyleLeft,
+        styleClassRight = defaultStyleRight,
+        styleClassMiddle = defaultStyleMiddle,
+        styleClassActive = defaultStyleCurrent,
+        styleClassInactive = defaultStyleOther,
+        styleClassDisabled = defaultStyleDisabled,
     } = props;
 
     const prevPageNum = currentPage === 1 ? null : currentPage - 1;
@@ -61,16 +58,11 @@ export default function Paginator(props: Props) {
     const itemPrev = (
         <li key="prev">
             {prevPageLink ? (
-                <Link
-                    href={prevPageLink}
-                    className={`${styleClassGeneral} ${styleClassLeft} ${styleClassInactive}`}
-                >
+                <a href={prevPageLink} className={[styleClassGeneral, styleClassLeft, styleClassInactive].join(' ')}>
                     {buttonLabelPrevious}
-                </Link>
+                </a>
             ) : (
-                <span
-                    className={`${styleClassGeneral} ${styleClassLeft} ${styleClassDisabled}`}
-                >
+                <span className={[styleClassGeneral, styleClassLeft, styleClassDisabled].join(' ')}>
                     {buttonLabelPrevious}
                 </span>
             )}
@@ -88,16 +80,11 @@ export default function Paginator(props: Props) {
     const itemNext = (
         <li key="next">
             {nextPageLink ? (
-                <Link
-                    href={nextPageLink}
-                    className={`${styleClassGeneral} ${styleClassRight} ${styleClassInactive}`}
-                >
+                <a href={nextPageLink} className={[styleClassGeneral, styleClassRight, styleClassInactive].join(' ')}>
                     {buttonLabelNext}
-                </Link>
+                </a>
             ) : (
-                <span
-                    className={`${styleClassGeneral} ${styleClassRight} ${styleClassDisabled}`}
-                >
+                <span className={[styleClassGeneral, styleClassRight, styleClassDisabled].join(' ')}>
                     {buttonLabelNext}
                 </span>
             )}
@@ -138,9 +125,7 @@ export default function Paginator(props: Props) {
             if (leftEllipsis) {
                 paginationItems.push(
                     <li key="left-ellipsis">
-                        <span
-                            className={`${styleClassGeneral} ${styleClassDisabled}`}
-                        >
+                        <span className={[styleClassGeneral, styleClassMiddle, styleClassDisabled].join(' ')}>
                             ...
                         </span>
                     </li>,
@@ -154,9 +139,7 @@ export default function Paginator(props: Props) {
             if (rightEllipsis) {
                 paginationItems.push(
                     <li key="right-ellipsis">
-                        <span
-                            className={`${styleClassGeneral} ${styleClassDisabled}`}
-                        >
+                        <span className={[styleClassGeneral, styleClassMiddle, styleClassDisabled].join(' ')}>
                             ...
                         </span>
                     </li>,
@@ -176,20 +159,15 @@ export default function Paginator(props: Props) {
 
         return (
             <li key={pageNum}>
-                <Link
-                    href={pageLink}
-                    className={`${styleClassGeneral}  ${
-                        isActive ? styleClassActive : styleClassInactive
-                    }`}
-                >
+                <a href={pageLink} className={[styleClassGeneral, styleClassMiddle, (isActive ? styleClassActive : styleClassInactive)].join(' ')}>
                     {pageNum}
-                </Link>
+                </a>
             </li>
         );
     };
 
     return (
-        <ul className={defaultStyleClassW}>
+        <ul className={styleClassWrapper}>
             {generatePaginationItems()}
         </ul>
     );

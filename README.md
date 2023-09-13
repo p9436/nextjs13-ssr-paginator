@@ -4,7 +4,7 @@ A pagination component for Next.js applications that supports server-side render
 
 ## Installation
 
-You can install the package using npm:
+Install the package using npm:
 
 ```bash
 npm install github:p9436/nextjs13-ssr-paginator
@@ -14,34 +14,63 @@ npm install github:p9436/nextjs13-ssr-paginator
 
 To use the Paginator component in your Next.js application, follow these steps:
 
-1. Import the Paginator component:
+# Import the Paginator component:
 
 ```javascript
 import Paginator from 'nextjs13-ssr-paginator';
 ```
 
-2. Place the Paginator component in your component's render:
-
+# Place the Paginator component in your Page:
 
 ```tsx
+// page.tsx
+import Paginator from "nexjs13-ssr-paginator";
+import { getUsers } from "../lib/user.service";
+
 export default async function Page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
     const currentPage = parseInt(searchParams['page'] as string, 10) || 1
-    const { data, meta } = await getData(currentPage) // 
+    const { data, meta } = await getUsers(currentPage)
 
     return (
-        <main>
+        <div className="p-2">
+            <h1 className="mb-2 font-bold">Pagination demo</h1>
             {data.map((user) => (
-                <div key={user.id}>
-                    <div>{user.accountId} - {user.email}</div>
+                <div key={user.id} className="py-2">
+                    <div>{user.id} - {user.name} - {user.email}</div>
                 </div>
             ))}
 
-            <nav className="pt-6">
-                <Paginator path="/admin/users" currentPage={currentPage} totalPages={meta.totalPages}/>
+            <nav className="pt-6 text-sm">
+                <Paginator path="/" params={searchParams} currentPage={currentPage} totalPages={meta.pagination.totalPages}/>
             </nav>
-        </main>
+        </div>
     )
 }
+```
+
+# Use Pagination Helper in server:
+
+```typescript
+// lib/user.service.ts
+import { paginationHelper, prismaPaginationHelper } from "nextjs13-ssr-paginator/pagination_helper"
+
+const perPage = 5;
+
+export async function getData(currentPage: number) {
+    const prisma = new PrismaClient();
+    const [recordsCount, result] = await prisma.$transaction([
+        prisma.user.count({}),
+        prisma.user.findMany({
+            orderBy: { name: 'asc' },
+            ...prismaPaginationHelper(currentPage, perPage)
+        }),
+    ]);
+    return {
+        meta: paginationHelper(recordsCount, currentPage, perPage),
+        data: result as TUser[]
+    }
+}
+
 ```
 
 Here is an example with a full list of available properties:
@@ -49,19 +78,20 @@ Here is an example with a full list of available properties:
 ```tsx
 // const urlParams = { q: 'image', in: 'actions' } 
 <Paginator
-  path="/your-route"         // The base path for pagination links
-  currentPage={1}            // The current active page number
-  totalPages={10}            // The total number of pages
-  params={ urlParams }       // (Optional) Url params, will be conwerted to /your-route?q=image&in=actions
-  maxVisiblePages={5}        // (Optional) The maximum number of visible pages
-  buttonLabelPrevious="Prev" // (Optional) Label for the "Previous" button
-  buttonLabelNext="Next"     // (Optional) Label for the "Next" button
-  styleClassGeneral="..."    // (Optional) CSS class for general styling
-  styleClassLeft="..."       // (Optional) CSS class for left buttons (e.g., Prev)
-  styleClassRight="..."      // (Optional) CSS class for right buttons (e.g., Next)
-  styleClassActive="..."     // (Optional) CSS class for active page number
-  styleClassInactive="..."   // (Optional) CSS class for inactive page numbers
-  styleClassDisabled="..."   // (Optional) CSS class for disabled buttons
+    path="/your-route"         // The base path for pagination links
+    currentPage={1}            // The current active page number
+    totalPages={10}            // The total number of pages
+    params={ urlParams }       // (Optional) Url params, will be conwerted to /your-route?q=image&in=actions
+    maxVisiblePages={5}        // (Optional) The maximum number of visible pages
+    buttonLabelPrevious="Prev" // (Optional) Label for the "Previous" button
+    buttonLabelNext="Next"     // (Optional) Label for the "Next" button
+    styleClassGeneral="..."    // (Optional) CSS class for general styling
+    styleClassLeft="..."       // (Optional) CSS class for left buttons (e.g., Prev)
+    styleClassRight="..."      // (Optional) CSS class for right buttons (e.g., Next)
+    styleClassMiddle="..."     // (Optional) CSS class for middle buttons
+    styleClassActive="..."     // (Optional) CSS class for active page number
+    styleClassInactive="..."   // (Optional) CSS class for inactive page numbers
+    styleClassDisabled="..."   // (Optional) CSS class for disabled buttons
 />
 ```
 
@@ -83,6 +113,7 @@ For example, to redefine the general styling, left buttons, and right buttons, y
 - `styleClassGeneral` (optional): CSS class for general styling.
 - `styleClassLeft` (optional): CSS class for left buttons (e.g., Prev).
 - `styleClassRight` (optional): CSS class for right buttons (e.g., Next).
+- `styleClassMiddle` (optional): CSS class for middle buttons.
 - `styleClassActive` (optional): CSS class for active page number.
 - `styleClassInactive` (optional): CSS class for inactive page numbers.
 - `styleClassDisabled` (optional): CSS class for disabled buttons.

@@ -1,7 +1,4 @@
-// TODO: Add descriptions to README
-
-
-export const perPage = 10
+export const perPageDefault = 10
 
 export interface PaginationProps {
     pagination: {
@@ -13,7 +10,7 @@ export interface PaginationProps {
     }
 }
 
-export function prismaPaginationHelper(currentPage: number) {
+export function prismaPaginationHelper(currentPage: number, perPage = perPageDefault) {
     const offset = (currentPage - 1) * perPage
 
     return {
@@ -22,7 +19,7 @@ export function prismaPaginationHelper(currentPage: number) {
     }
 }
 
-export function paginationHelper(totalRecords: number, currentPage: number, perPage: number): PaginationProps {
+export function paginationHelper(totalRecords: number, currentPage: number, perPage = perPageDefault): PaginationProps {
     const totalPages = Math.ceil(totalRecords / perPage);
     const nextPage = currentPage < totalPages ? currentPage + 1 : null
     return {

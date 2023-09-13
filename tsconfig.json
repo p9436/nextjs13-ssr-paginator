@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES6",      // Set the target ECMAScript version
     "module": "CommonJS", // Specify module system (CommonJS, ESNext, etc.)
-    "outDir": "./dist",   // Output directory for compiled files
+    "outDir": "./",       // Output directory for compiled files
     "rootDir": "./src",   // Root directory of your source files
     "strict": true,       // Enable strict type checking
     "jsx": "react-jsx" ,
