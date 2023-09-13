@@ -7,7 +7,7 @@ interface Props {
     buttonLabelPrevious?: string;
     buttonLabelNext?: string;
     styleClassWrapper?: string;
-    styleClassGeneral?: string;
+    styleClassItem?: string;
     styleClassLeft?: string;
     styleClassRight?: string;
     styleClassMiddle?: string;

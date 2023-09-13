@@ -5,7 +5,7 @@ require("./styles.css");
 // Defaults:
 const defaultBtnLabelPrevious = "Prev";
 const defaultBtnLabelNext = "Next";
-const defaultStyleGeneral = "item";
+const defaultStyleItem = "item";
 const defaultStyleLeft = "item-left";
 const defaultStyleMiddle = "item-mid";
 const defaultStyleRight = "item-right";
@@ -14,7 +14,7 @@ const defaultStyleCurrent = "item-state-current";
 const defaultStyleOther = "item-state-other";
 const defaultStyleWrapper = "pagination";
 function Paginator(props) {
-    const { path, currentPage, totalPages, params = {}, maxVisiblePages = 5, buttonLabelPrevious = defaultBtnLabelPrevious, buttonLabelNext = defaultBtnLabelNext, styleClassWrapper = defaultStyleWrapper, styleClassGeneral = defaultStyleGeneral, styleClassLeft = defaultStyleLeft, styleClassRight = defaultStyleRight, styleClassMiddle = defaultStyleMiddle, styleClassActive = defaultStyleCurrent, styleClassInactive = defaultStyleOther, styleClassDisabled = defaultStyleDisabled, } = props;
+    const { path, currentPage, totalPages, params = {}, maxVisiblePages = 5, buttonLabelPrevious = defaultBtnLabelPrevious, buttonLabelNext = defaultBtnLabelNext, styleClassWrapper = defaultStyleWrapper, styleClassItem = defaultStyleItem, styleClassLeft = defaultStyleLeft, styleClassRight = defaultStyleRight, styleClassMiddle = defaultStyleMiddle, styleClassActive = defaultStyleCurrent, styleClassInactive = defaultStyleOther, styleClassDisabled = defaultStyleDisabled, } = props;
     const prevPageNum = currentPage === 1 ? null : currentPage - 1;
     const prevPageLink = prevPageNum
         ? (() => {
@@ -22,7 +22,7 @@ function Paginator(props) {
             return `${path}?${queryParams}`;
         })()
         : null;
-    const itemPrev = ((0, jsx_runtime_1.jsx)("li", { children: prevPageLink ? ((0, jsx_runtime_1.jsx)("a", { href: prevPageLink, className: [styleClassGeneral, styleClassLeft, styleClassInactive].join(' '), children: buttonLabelPrevious })) : ((0, jsx_runtime_1.jsx)("span", { className: [styleClassGeneral, styleClassLeft, styleClassDisabled].join(' '), children: buttonLabelPrevious })) }, "prev"));
+    const itemPrev = ((0, jsx_runtime_1.jsx)("li", { children: prevPageLink ? ((0, jsx_runtime_1.jsx)("a", { href: prevPageLink, className: [styleClassItem, styleClassLeft, styleClassInactive].join(' '), children: buttonLabelPrevious })) : ((0, jsx_runtime_1.jsx)("span", { className: [styleClassItem, styleClassLeft, styleClassDisabled].join(' '), children: buttonLabelPrevious })) }, "prev"));
     const nextPageNum = currentPage === totalPages ? null : currentPage + 1;
     const nextPageLink = nextPageNum
         ? (() => {
@@ -30,7 +30,7 @@ function Paginator(props) {
             return `${path}?${queryParams}`;
         })()
         : null;
-    const itemNext = ((0, jsx_runtime_1.jsx)("li", { children: nextPageLink ? ((0, jsx_runtime_1.jsx)("a", { href: nextPageLink, className: [styleClassGeneral, styleClassRight, styleClassInactive].join(' '), children: buttonLabelNext })) : ((0, jsx_runtime_1.jsx)("span", { className: [styleClassGeneral, styleClassRight, styleClassDisabled].join(' '), children: buttonLabelNext })) }, "next"));
+    const itemNext = ((0, jsx_runtime_1.jsx)("li", { children: nextPageLink ? ((0, jsx_runtime_1.jsx)("a", { href: nextPageLink, className: [styleClassItem, styleClassRight, styleClassInactive].join(' '), children: buttonLabelNext })) : ((0, jsx_runtime_1.jsx)("span", { className: [styleClassItem, styleClassRight, styleClassDisabled].join(' '), children: buttonLabelNext })) }, "next"));
     const generatePaginationItems = () => {
         const paginationItems = [];
         paginationItems.push(itemPrev);
@@ -60,13 +60,13 @@ function Paginator(props) {
                 endPage = currentPage + Math.floor(maxVisiblePages / 2);
             }
             if (leftEllipsis) {
-                paginationItems.push((0, jsx_runtime_1.jsx)("li", { children: (0, jsx_runtime_1.jsx)("span", { className: [styleClassGeneral, styleClassMiddle, styleClassDisabled].join(' '), children: "..." }) }, "left-ellipsis"));
+                paginationItems.push((0, jsx_runtime_1.jsx)("li", { children: (0, jsx_runtime_1.jsx)("span", { className: [styleClassItem, styleClassMiddle, styleClassDisabled].join(' '), children: "..." }) }, "left-ellipsis"));
             }
             for (let pageNum = startPage; pageNum <= endPage; pageNum++) {
                 paginationItems.push(renderPaginationLink(pageNum));
             }
             if (rightEllipsis) {
-                paginationItems.push((0, jsx_runtime_1.jsx)("li", { children: (0, jsx_runtime_1.jsx)("span", { className: [styleClassGeneral, styleClassMiddle, styleClassDisabled].join(' '), children: "..." }) }, "right-ellipsis"));
+                paginationItems.push((0, jsx_runtime_1.jsx)("li", { children: (0, jsx_runtime_1.jsx)("span", { className: [styleClassItem, styleClassMiddle, styleClassDisabled].join(' '), children: "..." }) }, "right-ellipsis"));
             }
         }
         paginationItems.push(itemNext);
@@ -76,7 +76,7 @@ function Paginator(props) {
         const isActive = pageNum === currentPage;
         const queryParams = new URLSearchParams(Object.assign(Object.assign({}, params), { page: pageNum })).toString();
         const pageLink = pageNum === 1 ? path : `${path}?${queryParams}`;
-        return ((0, jsx_runtime_1.jsx)("li", { children: (0, jsx_runtime_1.jsx)("a", { href: pageLink, className: [styleClassGeneral, styleClassMiddle, (isActive ? styleClassActive : styleClassInactive)].join(' '), children: pageNum }) }, pageNum));
+        return ((0, jsx_runtime_1.jsx)("li", { children: (0, jsx_runtime_1.jsx)("a", { href: pageLink, className: [styleClassItem, styleClassMiddle, (isActive ? styleClassActive : styleClassInactive)].join(' '), children: pageNum }) }, pageNum));
     };
     return ((0, jsx_runtime_1.jsx)("ul", { className: styleClassWrapper, children: generatePaginationItems() }));
 }

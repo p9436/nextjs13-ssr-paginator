@@ -3,7 +3,7 @@ import './styles.css'
 // Defaults:
 const defaultBtnLabelPrevious = "Prev";
 const defaultBtnLabelNext = "Next";
-const defaultStyleGeneral = "item"
+const defaultStyleItem = "item"
 const defaultStyleLeft = "item-left"
 const defaultStyleMiddle = "item-mid"
 const defaultStyleRight = "item-right"
@@ -20,7 +20,7 @@ interface Props {
     buttonLabelPrevious?: string;
     buttonLabelNext?: string;
     styleClassWrapper?: string;
-    styleClassGeneral?: string;
+    styleClassItem?: string;
     styleClassLeft?: string;
     styleClassRight?: string;
     styleClassMiddle?: string;
@@ -40,7 +40,7 @@ export default function Paginator(props: Props) {
         buttonLabelPrevious = defaultBtnLabelPrevious,
         buttonLabelNext = defaultBtnLabelNext,
         styleClassWrapper = defaultStyleWrapper,
-        styleClassGeneral = defaultStyleGeneral,
+        styleClassItem = defaultStyleItem,
         styleClassLeft = defaultStyleLeft,
         styleClassRight = defaultStyleRight,
         styleClassMiddle = defaultStyleMiddle,
@@ -60,11 +60,11 @@ export default function Paginator(props: Props) {
     const itemPrev = (
         <li key="prev">
             {prevPageLink ? (
-                <a href={prevPageLink} className={[styleClassGeneral, styleClassLeft, styleClassInactive].join(' ')}>
+                <a href={prevPageLink} className={[styleClassItem, styleClassLeft, styleClassInactive].join(' ')}>
                     {buttonLabelPrevious}
                 </a>
             ) : (
-                <span className={[styleClassGeneral, styleClassLeft, styleClassDisabled].join(' ')}>
+                <span className={[styleClassItem, styleClassLeft, styleClassDisabled].join(' ')}>
                     {buttonLabelPrevious}
                 </span>
             )}
@@ -82,11 +82,11 @@ export default function Paginator(props: Props) {
     const itemNext = (
         <li key="next">
             {nextPageLink ? (
-                <a href={nextPageLink} className={[styleClassGeneral, styleClassRight, styleClassInactive].join(' ')}>
+                <a href={nextPageLink} className={[styleClassItem, styleClassRight, styleClassInactive].join(' ')}>
                     {buttonLabelNext}
                 </a>
             ) : (
-                <span className={[styleClassGeneral, styleClassRight, styleClassDisabled].join(' ')}>
+                <span className={[styleClassItem, styleClassRight, styleClassDisabled].join(' ')}>
                     {buttonLabelNext}
                 </span>
             )}
@@ -127,7 +127,7 @@ export default function Paginator(props: Props) {
             if (leftEllipsis) {
                 paginationItems.push(
                     <li key="left-ellipsis">
-                        <span className={[styleClassGeneral, styleClassMiddle, styleClassDisabled].join(' ')}>
+                        <span className={[styleClassItem, styleClassMiddle, styleClassDisabled].join(' ')}>
                             ...
                         </span>
                     </li>,
@@ -141,7 +141,7 @@ export default function Paginator(props: Props) {
             if (rightEllipsis) {
                 paginationItems.push(
                     <li key="right-ellipsis">
-                        <span className={[styleClassGeneral, styleClassMiddle, styleClassDisabled].join(' ')}>
+                        <span className={[styleClassItem, styleClassMiddle, styleClassDisabled].join(' ')}>
                             ...
                         </span>
                     </li>,
@@ -161,7 +161,7 @@ export default function Paginator(props: Props) {
 
         return (
             <li key={pageNum}>
-                <a href={pageLink} className={[styleClassGeneral, styleClassMiddle, (isActive ? styleClassActive : styleClassInactive)].join(' ')}>
+                <a href={pageLink} className={[styleClassItem, styleClassMiddle, (isActive ? styleClassActive : styleClassInactive)].join(' ')}>
                     {pageNum}
                 </a>
             </li>

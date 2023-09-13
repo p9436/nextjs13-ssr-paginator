@@ -48,7 +48,7 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
 }
 ```
 
-# Use Pagination Helper in server:
+# Utilize the Pagination Helper on the server:
 
 ```typescript
 // lib/user.service.ts
@@ -73,7 +73,11 @@ export async function getData(currentPage: number) {
 
 ```
 
-Here is an example with a full list of available properties:
+Now, the Paginator will seamlessly integrate into your page:
+
+![img.png](docs%2Fimg.png)
+
+Here's an example with a comprehensive list of available properties:
 
 ```tsx
 // const urlParams = { q: 'image', in: 'actions' } 
@@ -83,9 +87,10 @@ Here is an example with a full list of available properties:
     totalPages={10}            // The total number of pages
     params={ urlParams }       // (Optional) Url params, will be conwerted to /your-route?q=image&in=actions
     maxVisiblePages={5}        // (Optional) The maximum number of visible pages
-    buttonLabelPrevious="Prev" // (Optional) Label for the "Previous" button
+    buttonLabelPrevious="Prev" // (Optional) Label for the "Prev" button
     buttonLabelNext="Next"     // (Optional) Label for the "Next" button
-    styleClassGeneral="..."    // (Optional) CSS class for general styling
+    styleClassWrapper="..."    // (Optional) CSS class for paginator wrapper element
+    styleClassItem="..."       // (Optional) CSS class for general styling
     styleClassLeft="..."       // (Optional) CSS class for left buttons (e.g., Prev)
     styleClassRight="..."      // (Optional) CSS class for right buttons (e.g., Next)
     styleClassMiddle="..."     // (Optional) CSS class for middle buttons
@@ -97,9 +102,41 @@ Here is an example with a full list of available properties:
 
 ## Styling
 
-This component is based on Tailwind CSS by default. However, you can easily customize the styling by redefining your own style classes for various elements.
+While this component is primarily based on Tailwind CSS, you have 
+the flexibility to customize the styling by redefining your own style 
+classes for different elements.
 
-For example, to redefine the general styling, left buttons, and right buttons, you can set the `styleClassGeneral`, `styleClassLeft`, and `styleClassRight` props accordingly.
+For instance, to redefine the general styling, left buttons, and
+right buttons, simply set the new class names for `styleClass*`
+props accordingly, and define your own related CSS styles
+
+```tsx
+<Paginator styleClassWrapper="my-paginator" styleClassItem="p-item" otherOptions />
+```
+
+Another way to modify styles is to override existing CSS in your application:
+```css
+/* global.css */
+
+/* Override pagination styles */
+body {
+    background: rgb(32,33,36);
+    color: rgb(232,234,237);
+}
+
+ul.pagination .item {
+    @apply border-amber-900;
+}
+ul.pagination .item-state-disable{
+    @apply bg-gray-800 text-gray-500 !important;
+}
+ul.pagination .item-state-current {
+    @apply bg-amber-950 !important;
+}
+ul.pagination .item-state-other {
+    @apply bg-gray-600 text-amber-400 !important
+}
+```
 
 ## Props
 
@@ -108,9 +145,10 @@ For example, to redefine the general styling, left buttons, and right buttons, y
 - `totalPages`: The total number of pages.
 - `params` (optional): URL params.
 - `maxVisiblePages` (optional): The maximum number of visible pages (default: 5).
-- `buttonLabelPrevious` (optional): Label for the "Previous" button (default: "Previous").
+- `buttonLabelPrevious` (optional): Label for the "Previous" button (default: "Prev").
 - `buttonLabelNext` (optional): Label for the "Next" button (default: "Next").
-- `styleClassGeneral` (optional): CSS class for general styling.
+- `styleClassWrapper` (optional) CSS class for paginator wrapper element
+- `styleClassItem` (optional): CSS class for general styling.
 - `styleClassLeft` (optional): CSS class for left buttons (e.g., Prev).
 - `styleClassRight` (optional): CSS class for right buttons (e.g., Next).
 - `styleClassMiddle` (optional): CSS class for middle buttons.
