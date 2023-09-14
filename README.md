@@ -9,7 +9,7 @@ TL;DR - See [example](examples%2Fnextjs)
 Install the package using npm:
 
 ```bash
-npm install github:p9436/nextjs13-ssr-paginator
+npm install nextjs-ssr-paginator
 ```
 
 ## Usage
