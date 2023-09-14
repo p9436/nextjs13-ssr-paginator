@@ -2,6 +2,8 @@
 
 A pagination component for Next.js applications that supports server-side rendering (SSR).
 
+TL;DR - See [example](examples%2Fnextjs) 
+
 ## Installation
 
 Install the package using npm:
