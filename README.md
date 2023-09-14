@@ -2,8 +2,6 @@
 
 A pagination component for Next.js applications that supports server-side rendering (SSR).
 
-TL;DR - See [example](examples%2Fnextjs) 
-
 ## Installation
 
 Install the package using npm:
@@ -16,13 +14,13 @@ npm install nextjs-ssr-paginator
 
 To use the Paginator component in your Next.js application, follow these steps:
 
-# Import the Paginator component:
+### Import the Paginator component:
 
 ```javascript
-import Paginator from 'nextjs13-ssr-paginator';
+import Paginator from 'nextjs-ssr-paginator';
 ```
 
-# Place the Paginator component in your Page:
+### Place the Paginator component in your Page:
 
 ```tsx
 // page.tsx
@@ -50,11 +48,11 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
 }
 ```
 
-# Utilize the Pagination Helper on the server:
+### Use the Pagination Helper on the server:
 
 ```typescript
 // lib/user.service.ts
-import { paginationHelper, prismaPaginationHelper } from "nextjs13-ssr-paginator/pagination_helper"
+import { paginationHelper, prismaPaginationHelper } from "nextjs-ssr-paginator/pagination_helper"
 
 const perPage = 5;
 
@@ -79,6 +77,9 @@ Now, the Paginator will seamlessly integrate into your page:
 
 ![img.png](docs%2Fimg.png)
 
+See the [example](examples%2Fnextjs) 
+
+## Paginator properties
 Here's an example with a comprehensive list of available properties:
 
 ```tsx
@@ -164,4 +165,4 @@ This package is distributed under the MIT License. See [LICENSE](LICENSE) for mo
 
 ---
 
-If you encounter any issues or have questions, feel free to [open an issue](https://github.com/your-username/nextjs13-ssr-paginator/issues) on the GitHub repository.
+If you encounter any issues or have questions, feel free to [open an issue](https://github.com/your-p9436/nextjs-ssr-paginator/issues) on the GitHub repository.

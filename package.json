@@ -1,6 +1,6 @@
 {
   "name": "nextjs-ssr-paginator",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "NextJS 13 Server Side Rendered Paginator",
   "main": "index.js",
   "types": "index.d.ts",
@@ -20,6 +20,8 @@
     "nextjs-component"
   ],
   "author": "p9436",
+  "homepage": "https://github.com/p9436/nextjs13-ssr-paginator#readme",
+  "repository": "github:p9436/nextjs13-ssr-paginator",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.5.6",
