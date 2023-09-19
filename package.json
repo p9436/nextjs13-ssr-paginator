@@ -1,12 +1,11 @@
 {
   "name": "nextjs-ssr-paginator",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "NextJS 13 Server Side Rendered Paginator",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "postinstall": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

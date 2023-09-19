@@ -1,4 +1,4 @@
-import { paginationHelper, prismaPaginationHelper } from "../../../../pagination_helper"
+import { paginationHelper, prismaPaginationHelper } from "../../../../helper"
 import { PrismaClient } from "@prisma/client"
 
 const perPage = 5;
